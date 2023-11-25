@@ -1,4 +1,4 @@
-const main = require("./server");
+const { main }= require("./db");
 const { ObjectId } = require("mongodb");
 const constant = require("./constant");
 
@@ -32,6 +32,7 @@ exports.postTrips = async (req, res) => {
     try {
       // fetching data from database
       const db = await main();
+      
 
       //   finding  bus owner data from database
       const busOwnerData = await db
