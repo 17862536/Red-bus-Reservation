@@ -1,17 +1,30 @@
-import { useState } from "react";
+
 import buslogo from "../assets/To.jpg"
 import calender from '../assets/from.jpg'
 import swap from '../assets/Swap.jpg'
 import Input from "./Input";
 import Hero from '../assets/HeroImage.png'
+import { useSelector,useDispatch } from "react-redux";
+import { setFromLoc,setToLoc } from "../redux/busSlice";
+
 function LandingPage() {
-  const [fromLoc, setFromLoc] = useState("Bengaluru");
-  const [toLoc, setToLoc] = useState("Hyderabad");
+  const fromLoc = useSelector((state) => state.bus.fromLoc)
+  const toLoc = useSelector((state) => state.bus.toLoc)
+
+  const dispatch = useDispatch()
 
   const handleSwap = () => {
-    setFromLoc(toLoc);
-    setToLoc(fromLoc);
+    dispatch(setToLoc(fromLoc))
+    dispatch(setFromLoc(toLoc))
   };
+
+  const setFrom = (e) => {
+    dispatch(setFromLoc(e))
+  }
+
+  const setTo = (e) => {
+    dispatch(setToLoc(e))
+  }
   return (
     <div className=" z-10 min-h-[89vh]  grid justify-center  ">
         <img src={Hero} alt="hero" className=' z-10 w-full fixed top-[10vh]  ' />
@@ -25,7 +38,7 @@ function LandingPage() {
             type={"text"}
             img={buslogo}
             placeholder={fromLoc}
-            onChangeFunc={setFromLoc}
+            onChangeFunc={setFrom}
           />
 
           <div className="w-10 h-10 m-auto bg-gray-50 border-2 border-gray-400 rounded-full overflow-hidden">
@@ -42,7 +55,7 @@ function LandingPage() {
             type={"text"}
             img={buslogo}
             placeholder={toLoc}
-            onChangeFunc={setToLoc}
+            onChangeFunc={setTo}
           />
 
           <Input name={"Date"} type={"date"} img={calender} />

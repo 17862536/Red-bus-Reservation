@@ -17,15 +17,15 @@ function Navbar() {
   return (
     <div>
       <div className="h-[10vh] w-full p-2 bg-green-300 flex flex-wrap justify-between">
-        <div className="px-10 flex my-auto">
+        <div className="px-1 flex my-auto">
           <img
             src={bus}
             alt="Brand Logo of a bus"
             className="h-[60px] w-[60px] rounded-full"
           />
-          <div className="my-auto px-5">
-            <h1 className="text-3xl font-bold text-white">RESERVE</h1>
-          </div>
+          {/* <div className="my-auto px-5">
+            <h1 className="text-xl font-bold text-white">RESERVE</h1>
+          </div> */}
         </div>
         <div className="flex">
           <div
