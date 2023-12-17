@@ -4,10 +4,10 @@ const constant = require("./constant");
 
 // post the ticket data to the db
 exports.postTicket = async (req, res) => {
-  const { name, age, email, gender, Adress, mobile, tripId } = req.body;
+  const { name, age, email, gender, address, phoneNo, tripId } = req.body;
 
   //   if data exist in request body
-  if (name && age && email && gender && Adress && mobile && tripId) {
+  if (name && age && email && gender && address && phoneNo && tripId) {
     try {
       // fetching data from database
       const db = await main();
@@ -23,8 +23,8 @@ exports.postTicket = async (req, res) => {
         age: age,
         email: email,
         gender: gender,
-        mobile: mobile,
-        Adress: Adress,
+        mobile: phoneNo,
+        Adress: address,
         tripId: tripId,
       });
 

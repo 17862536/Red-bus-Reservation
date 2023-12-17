@@ -1,4 +1,7 @@
-import { useState } from "react";
+import { useState , useEffect} from "react";
+import axios from 'axios';
+import { useDispatch } from 'react-redux';
+import { setTripList } from "../redux/tripSlice";
 function BusSelectionFilters() {
   const filters = [
     {
@@ -30,9 +33,9 @@ function BusSelectionFilters() {
       title: "Price",
       innerName: "busFare",
       type: [
+        { type: "below 500", value: 500 },
         { type: "below 1k", value: 1000 },
         { type: "below 2k", value: 2000 },
-        { type: "below 3k", value: 3000 },
       ],
     },
   ];
@@ -52,6 +55,18 @@ function BusSelectionFilters() {
     }
     // console.log(filter);
   }
+  
+  const dispatch = useDispatch()
+  useEffect(() => {
+    const queryString = filter.map((item) => `${Object.keys(item)[0]}=${Object.values(item)[0]}`).join('&')
+    axios.get(`http://127.0.0.1:5000/trips?${queryString}`).then( //TODO add filets for form and to location - backend API needed
+      (res) => {
+        dispatch(setTripList(res.data))
+      }
+    ).catch((err) => {
+      console.log(err)
+    })
+  }, [dispatch, filter])
 
   return (
     <div>

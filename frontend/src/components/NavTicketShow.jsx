@@ -7,6 +7,8 @@ import { MdArrowBackIos, MdArrowForwardIos } from "react-icons/md";
 import { AiOutlineSwap } from "react-icons/ai";
 import { useSelector,useDispatch } from "react-redux";
 import { setFromLoc,setToLoc } from "../redux/busSlice";
+import CustomerInfo from "./CustomerInfo";
+import TicketSuccessModal from "./TicketSuccessModal";
 
 function NavTicketShow() {
   const [modify, setModify] = useState(false);
@@ -44,6 +46,8 @@ function NavTicketShow() {
 
   return (
     <>
+    <TicketSuccessModal/>
+    <CustomerInfo/>
       <div className=" relative z-10 p-5 bg-red-300 text-xl">
         <span className="font-semibold">{`Home >`}</span>
         <span>{` Trips >`}</span> <span>{` ${fromLoc} To ${toLoc} >`}</span>
@@ -52,11 +56,11 @@ function NavTicketShow() {
       {modify ? (
         <div className=" z-10 p-1 bg-gray-50 border-b-2 border-gray-200 text-xl font-bold sticky top-0 flex">
           {/**navbar with input fields for modifications */}
-          <div className="flex">
+          <div className="flex flex-wrap">
             <Input
               name="From"
               type="text"
-              value={fromLoc}
+              placeholder={fromLoc}
               onChangeFunc={setFrom}
             />
             <div className="mr-10 w-10 h-10 m-auto bg-gray-50 ">
@@ -67,7 +71,7 @@ function NavTicketShow() {
             <Input
               name="To"
               type="text"
-              value={toLoc}
+              placeholder={toLoc}
               onChangeFunc={setTo}
             />
             <Input name="Date" type="date" value={currDate} />
@@ -87,7 +91,7 @@ function NavTicketShow() {
             <FaArrowRightLong style={{ display: "inline" }} />
             <span className="p-5">{toLoc}</span>
           </div>
-          <div className="flex px-10 text-lg">
+          <div className="flex  flex-wrap px-10 text-lg">
             <div
               className="my-auto px-2 cursor-pointer"
               onClick={() => setPreviousDay()}
